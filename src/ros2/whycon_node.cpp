@@ -1,11 +1,14 @@
-#include <ros/ros.h>
-#include "whycon_ros.h"
+#include "rclcpp/rclcpp.hpp"
+#include "whycon_ros.hpp"
 
-int main(int argc, char** argv)
+/*Instead of passing the node’s name to the library initialization call,
+ we do the initialization, then pass the node name to the creation of the node object */
+
+int main(int argc, char ** argv)
 {
-  ros::init(argc, argv, "whycon");
-  ros::NodeHandle n("~");
-
-  whycon::WhyConROS whycon_ros(n);
-  ros::spin();
+  rclcpp::init(argc, argv);
+  auto node_handle = std::make_shared<whycon::WhyConROS>();
+  rclcpp::spin(node_handle);
+  rclcpp::shutdown();
+  return 0; 
 }
