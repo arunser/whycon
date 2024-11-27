@@ -43,7 +43,7 @@ whycon::WhyConROS::WhyConROS() : Node("whycon"), is_tracking(false), should_rese
   /* initialize ros */
   int input_queue_size = 1;
   this->get_parameter_or("input_queue_size", input_queue_size, input_queue_size);
-  //this->declare_parameter<std::string>("image_transport", "compressed");
+  this->declare_parameter<std::string>("image_transport", "compressed");
   cam_sub = it.subscribeCamera("/image_raw", input_queue_size, std::bind(&WhyConROS::on_image, this, std::placeholders::_1, std::placeholders::_2));  //check again
   
 
